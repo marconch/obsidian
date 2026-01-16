@@ -36,8 +36,8 @@
   }
 }
 
-/* Context path icon glow */
-@keyframes context-path-glow {
+/* External context icon glow */
+@keyframes external-context-glow {
   0%,
   100% {
     filter: drop-shadow(0 0 2px rgba(217, 119, 87, 0.4));
@@ -90,11 +90,10 @@
 /* ============================================
    components/header.css
    ============================================ */
-/* Header */
+/* Header - just logo and title */
 .claudian-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 0 12px 12px 12px;
 }
 
@@ -102,6 +101,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-shrink: 0;
 }
 
 .claudian-logo {
@@ -115,11 +115,13 @@
   font-weight: 600;
 }
 
-/* Header actions (right side) */
+/* Header actions (right side - always stays right via margin-left: auto) */
 .claudian-header-actions {
   display: flex;
   align-items: center;
   gap: 4px;
+  flex-shrink: 0;
+  margin-left: auto;
 }
 
 /* Header icon buttons (history, new, etc.) */
@@ -144,6 +146,92 @@
   height: 16px;
 }
 
+/* New tab button icon slightly larger */
+.claudian-new-tab-btn svg {
+  width: 16.8px;
+  height: 16.8px;
+}
+
+/* ============================================
+   components/tabs.css
+   ============================================ */
+/* Tab Badges - Minimal numbered badge navigation */
+
+/* Outer container in nav row */
+.claudian-tab-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Inner container for tab badges */
+.claudian-tab-badges {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Individual badge */
+.claudian-tab-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  border: 2px solid var(--background-modifier-border);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--text-muted);
+  background: var(--background-primary);
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+
+.claudian-tab-badge:hover {
+  background: var(--background-modifier-hover);
+  color: var(--text-normal);
+}
+
+/* Active tab - accent color border */
+.claudian-tab-badge-active {
+  border-color: var(--interactive-accent);
+  color: var(--text-normal);
+}
+
+/* Streaming tab (background work) - brand color border */
+.claudian-tab-badge-streaming {
+  border-color: var(--claudian-brand, #da7756);
+}
+
+/* Attention needed - red border */
+.claudian-tab-badge-attention {
+  border-color: var(--text-error);
+}
+
+/* Idle tab - muted border (default) */
+.claudian-tab-badge-idle {
+  border-color: var(--background-modifier-border);
+}
+
+/* Tab content container (wrapper for all tabs) */
+.claudian-tab-content-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Per-tab content area */
+.claudian-tab-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
 
 /* ============================================
    components/history.css
@@ -153,19 +241,19 @@
   position: relative;
 }
 
-/* History dropdown menu */
+/* History dropup menu (opens upward since it's at bottom of view) */
 .claudian-history-menu {
   display: none;
   position: absolute;
-  top: 100%;
+  bottom: 100%;
   right: 0;
-  margin-top: 4px;
+  margin-bottom: 4px;
   background: var(--background-secondary);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--background-modifier-border);
   border-radius: 6px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.25);
   z-index: 1000;
   max-height: 400px;
   overflow: hidden;
@@ -378,8 +466,8 @@
 }
 
 .claudian-message-user {
+  position: relative;
   background: rgba(0, 0, 0, 0.3);
-  color: var(--text-on-accent);
   align-self: flex-end;
   border-bottom-right-radius: 4px;
 }
@@ -422,7 +510,49 @@
 
 /* Text blocks within message content */
 .claudian-text-block {
+  position: relative;
   margin: 0;
+}
+
+/* Copy button for text blocks */
+.claudian-text-copy-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-family: var(--font-monospace);
+  background: var(--background-primary);
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s ease, color 0.15s ease, background 0.15s ease;
+  border-radius: 3px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.claudian-text-copy-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Show copy button on hover */
+.claudian-text-block:hover .claudian-text-copy-btn {
+  opacity: 1;
+}
+
+.claudian-text-copy-btn:hover {
+  background: var(--background-modifier-hover);
+  color: var(--text-normal);
+}
+
+/* Copied state - only affects color, visibility still controlled by hover */
+.claudian-text-copy-btn.copied {
+  color: var(--text-accent);
 }
 
 .claudian-text-block+.claudian-tool-call {
@@ -478,8 +608,7 @@
 /* Code blocks in chat messages */
 .claudian-code-wrapper pre,
 .claudian-message-content pre {
-  background: var(--background-secondary);
-  border: 1px solid var(--background-modifier-border);
+  background: rgba(0, 0, 0, 0.2);
   padding: 8px 12px;
   border-radius: 6px;
   overflow-x: auto;
@@ -562,7 +691,6 @@
   color: var(--text-normal);
 }
 
-
 /* ============================================
    components/thinking.css
    ============================================ */
@@ -608,6 +736,7 @@
   gap: 8px;
   padding: 4px 0;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .claudian-thinking-label {
@@ -668,6 +797,7 @@
   gap: 8px;
   padding: 4px 0;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .claudian-tool-icon {
@@ -783,123 +913,139 @@
 
 
 /* ============================================
-   components/todo.css
+   components/todo-panel.css
    ============================================ */
-/* Todo List (TodoWrite tool) */
-.claudian-todo-list {
-  margin: 8px 0;
+/* Todo Panel - persistent bottom panel for todos */
+
+/* Main container - no border/background, flows seamlessly */
+.claudian-todo-panel {
+  padding: 0;
 }
 
-.claudian-text-block+.claudian-todo-list {
-  margin-top: 8px;
+/* Todos container */
+.claudian-todo-panel-todos {
+  margin-top: 4px;
 }
 
-.claudian-todo-list+.claudian-text-block {
-  margin-top: 8px;
-}
-
-.claudian-tool-call+.claudian-todo-list {
-  margin-top: 8px;
-}
-
-.claudian-todo-list+.claudian-tool-call {
-  margin-top: 8px;
-}
-
-/* Todo list header */
-.claudian-todo-header {
+/* Header (collapsed view) - subtle hover only */
+.claudian-todo-panel-header {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   padding: 4px 0;
   cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.15s ease;
+  overflow: hidden;
 }
 
-.claudian-todo-icon {
+.claudian-todo-panel-header:hover {
+  background: var(--background-modifier-hover);
+}
+
+.claudian-todo-panel-header:focus-visible {
+  outline: 2px solid var(--interactive-accent);
+  outline-offset: 2px;
+}
+
+/* List icon */
+.claudian-todo-panel-icon {
   display: flex;
   align-items: center;
   color: var(--interactive-accent);
   flex-shrink: 0;
 }
 
-.claudian-todo-icon svg {
+.claudian-todo-panel-icon svg {
   width: 16px;
   height: 16px;
 }
 
-.claudian-todo-label {
-  flex: 1;
+/* Label */
+.claudian-todo-panel-label {
+  font-family: var(--font-monospace);
   font-size: 13px;
   font-weight: 500;
-  color: var(--text-normal);
+  color: var(--interactive-accent);
 }
 
-/* Todo list content */
-.claudian-todo-content {
-  padding: 4px 0 4px 24px;
+/* Current task preview (collapsed state) */
+.claudian-todo-panel-current {
+  font-family: var(--font-monospace);
+  font-size: 13px;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
 }
 
-/* Individual todo item */
-.claudian-todo-item {
+/* Content (expanded list) */
+.claudian-todo-panel-content {
+  padding: 4px 0 4px 18px;
+}
+
+/* Individual todo item - reuses existing styles */
+.claudian-todo-panel-content .claudian-todo-item {
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  padding: 6px 0;
+  padding: 4px 0;
 }
 
-.claudian-todo-item:first-child {
+.claudian-todo-panel-content .claudian-todo-item:first-child {
   padding-top: 0;
 }
 
-.claudian-todo-item:last-child {
+.claudian-todo-panel-content .claudian-todo-item:last-child {
   padding-bottom: 0;
 }
 
-.claudian-todo-status-icon {
+.claudian-todo-panel-content .claudian-todo-status-icon {
   display: flex;
   align-items: center;
   flex-shrink: 0;
   width: 16px;
   height: 16px;
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
-.claudian-todo-status-icon svg {
+.claudian-todo-panel-content .claudian-todo-status-icon svg {
   width: 16px;
   height: 16px;
 }
 
+.claudian-todo-panel-content .claudian-todo-text {
+  font-family: var(--font-monospace);
+  font-size: 13px;
+  line-height: 1.4;
+  flex: 1;
+}
+
 /* Status-specific styling */
-.claudian-todo-pending .claudian-todo-status-icon {
+.claudian-todo-panel-content .claudian-todo-pending .claudian-todo-status-icon {
   color: var(--text-muted);
 }
 
-.claudian-todo-pending .claudian-todo-text {
+.claudian-todo-panel-content .claudian-todo-pending .claudian-todo-text {
   color: var(--text-muted);
 }
 
-.claudian-todo-in_progress .claudian-todo-status-icon {
+.claudian-todo-panel-content .claudian-todo-in_progress .claudian-todo-status-icon {
   color: var(--interactive-accent);
 }
 
-.claudian-todo-in_progress .claudian-todo-text {
+.claudian-todo-panel-content .claudian-todo-in_progress .claudian-todo-text {
   color: var(--text-normal);
   font-weight: 500;
 }
 
-.claudian-todo-completed .claudian-todo-status-icon {
+.claudian-todo-panel-content .claudian-todo-completed .claudian-todo-status-icon {
   color: var(--color-green);
 }
 
-.claudian-todo-completed .claudian-todo-text {
+.claudian-todo-panel-content .claudian-todo-completed .claudian-todo-text {
   color: var(--text-muted);
-  text-decoration: line-through;
-}
-
-.claudian-todo-text {
-  font-size: 13px;
-  line-height: 1.4;
-  flex: 1;
 }
 
 
@@ -934,6 +1080,7 @@
   gap: 8px;
   padding: 4px 0;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .claudian-subagent-icon {
@@ -1112,692 +1259,6 @@
 
 
 /* ============================================
-   components/ask-user-question.css
-   ============================================ */
-/**
- * AskUserQuestion styles - minimal design.
- */
-
-/* ============================================
- * Question Panel (replaces input area)
- * ============================================ */
-
-.claudian-ask-panel {
-  padding: 12px 0;
-  outline: none;
-}
-
-.claudian-ask-panel:focus {
-  outline: none;
-}
-
-/* Tab navigation row */
-.claudian-ask-panel-tabs {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 12px;
-  font-size: 13px;
-}
-
-.claudian-ask-panel-nav {
-  color: var(--text-muted);
-  cursor: pointer;
-  user-select: none;
-}
-
-.claudian-ask-panel-nav:hover {
-  color: var(--text-normal);
-}
-
-.claudian-ask-panel-tab {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 0 !important;
-  margin: 0 !important;
-  border: none !important;
-  border-radius: 0 !important;
-  background: none !important;
-  background-color: transparent !important;
-  color: var(--text-muted);
-  cursor: pointer;
-  font-size: 13px;
-  font-family: var(--font-monospace);
-  /* Completely reset button appearance */
-  appearance: none !important;
-  -webkit-appearance: none !important;
-  -moz-appearance: none !important;
-  box-shadow: none !important;
-  outline: none !important;
-  text-decoration: none !important;
-  text-shadow: none !important;
-}
-
-.claudian-ask-panel-tab:hover {
-  color: var(--text-normal);
-  background: none !important;
-  box-shadow: none !important;
-  border: none !important;
-}
-
-.claudian-ask-panel-tab:focus {
-  outline: none !important;
-  box-shadow: none !important;
-  border: none !important;
-}
-
-.claudian-ask-panel-tab.active {
-  color: var(--interactive-accent);
-  background: none !important;
-  border: none !important;
-}
-
-.claudian-ask-panel-tab-check {
-  font-family: monospace;
-}
-
-/* Green dot for answered tabs */
-.claudian-ask-panel-tab.answered .claudian-ask-panel-tab-check {
-  color: var(--color-green);
-}
-
-
-/* Question content */
-.claudian-ask-panel-content {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.claudian-ask-panel-question {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text-normal);
-  margin-bottom: 8px;
-}
-
-/* Options list */
-.claudian-ask-panel-options {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  font-family: var(--font-monospace);
-  font-size: 13px;
-}
-
-.claudian-ask-panel-option {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  padding: 4px 0;
-  cursor: pointer;
-  color: var(--text-normal);
-}
-
-.claudian-ask-panel-option:hover {
-  color: var(--interactive-accent);
-}
-
-.claudian-ask-panel-option.focused {
-  color: var(--interactive-accent);
-}
-
-.claudian-ask-panel-option.selected {
-  color: var(--interactive-accent);
-}
-
-/* Caret indicator (> or space) */
-.claudian-ask-panel-caret {
-  width: 12px;
-  flex-shrink: 0;
-  color: var(--interactive-accent);
-  font-weight: bold;
-}
-
-/* Number/checkbox indicator */
-.claudian-ask-panel-indicator {
-  flex-shrink: 0;
-  color: var(--text-muted);
-  white-space: nowrap;
-}
-
-.claudian-ask-panel-option.focused .claudian-ask-panel-caret {
-  color: var(--interactive-accent);
-}
-
-.claudian-ask-panel-option.focused .claudian-ask-panel-indicator {
-  color: var(--interactive-accent);
-}
-
-/* Green checkmark for selected items */
-.claudian-ask-panel-option.selected .claudian-ask-panel-indicator {
-  color: var(--color-green);
-}
-
-.claudian-ask-panel-option-text {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.claudian-ask-panel-label-row {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.claudian-ask-panel-option-label {
-  font-weight: 500;
-}
-
-/* Checkmark after label for single-select */
-.claudian-ask-panel-checkmark {
-  color: var(--color-green);
-  font-weight: bold;
-}
-
-.claudian-ask-panel-option-desc {
-  color: var(--text-muted);
-  font-weight: normal;
-}
-
-/* Other option */
-.claudian-ask-panel-other {
-  flex-wrap: wrap;
-}
-
-.claudian-ask-panel-other-input {
-  flex: 1;
-  min-width: 150px;
-  padding: 2px 4px;
-  border: none;
-  border-bottom: 1px solid var(--background-modifier-border);
-  background: transparent;
-  color: var(--text-normal);
-  font-family: var(--font-monospace);
-  font-size: 13px;
-}
-
-.claudian-ask-panel-other-input:focus {
-  outline: none;
-  border-bottom-color: var(--interactive-accent);
-}
-
-.claudian-ask-panel-other-input::placeholder {
-  color: var(--text-faint);
-}
-
-/* Keyboard hint */
-.claudian-ask-panel-hint {
-  margin-top: 12px;
-  font-size: 12px;
-  color: var(--text-muted);
-}
-
-/* Submit review panel */
-.claudian-ask-panel-summary {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 16px;
-  font-family: var(--font-monospace);
-  font-size: 13px;
-}
-
-.claudian-ask-panel-summary-item {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.claudian-ask-panel-summary-question {
-  color: var(--text-normal);
-}
-
-.claudian-ask-panel-summary-answer {
-  color: var(--color-green);
-  padding-left: 8px;
-}
-
-.claudian-ask-panel-summary-answer.unanswered {
-  color: var(--text-muted);
-  font-style: italic;
-}
-
-.claudian-ask-panel-submit-prompt {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-bottom: 8px;
-}
-
-/* ============================================
- * Tool Call Result Block - matches toolcalls.css style
- * ============================================ */
-
-.claudian-ask-question-block {
-  margin: 8px 0;
-}
-
-.claudian-ask-question-block.claudian-ask-question-pending {
-  display: none;
-}
-
-/* Header - transparent like other tool calls */
-.claudian-ask-question-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 4px 0;
-  cursor: pointer;
-}
-
-.claudian-ask-question-icon {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-  color: var(--text-accent);
-}
-
-.claudian-ask-question-icon svg {
-  width: 16px;
-  height: 16px;
-}
-
-.claudian-ask-question-label {
-  flex: 1;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-normal);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.claudian-ask-question-count {
-  font-size: 12px;
-  color: var(--text-muted);
-}
-
-.claudian-ask-question-status {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
-
-.claudian-ask-question-status svg {
-  width: 14px;
-  height: 14px;
-}
-
-.claudian-ask-question-status.status-completed {
-  color: var(--color-green);
-}
-
-.claudian-ask-question-status.status-error,
-.claudian-ask-question-status.status-blocked {
-  color: var(--color-red);
-}
-
-/* Content - indented to align under label */
-.claudian-ask-question-content {
-  padding: 4px 0 4px 24px;
-}
-
-/* Q&A pairs */
-.claudian-ask-question-qa {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 6px 0;
-}
-
-.claudian-ask-question-qa + .claudian-ask-question-qa {
-  border-top: 1px solid var(--background-modifier-border);
-  padding-top: 10px;
-}
-
-.claudian-ask-question-q-header {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.claudian-ask-question-answer {
-  font-size: 13px;
-  color: var(--text-normal);
-  padding-left: 8px;
-  border-left: 2px solid var(--interactive-accent);
-}
-
-.claudian-ask-question-error {
-  font-size: 12px;
-  color: var(--color-red);
-  font-style: italic;
-}
-
-/* Q&A list - tree symbol + aligned container */
-.claudian-ask-question-list {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 8px;
-}
-
-.claudian-ask-question-tree {
-  flex-shrink: 0;
-  font-size: 13px;
-  color: var(--text-muted);
-}
-
-.claudian-ask-question-aligned {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.claudian-ask-question-item {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.claudian-ask-question-q {
-  font-size: 13px;
-  color: var(--text-muted);
-  /* Hanging indent: wrapped lines align with text after "Q: " */
-  padding-left: 1.5em;
-  text-indent: -1.5em;
-}
-
-.claudian-ask-question-a {
-  font-size: 13px;
-  color: var(--color-green);
-  /* Hanging indent: wrapped lines align with text after "A: " */
-  padding-left: 1.5em;
-  text-indent: -1.5em;
-}
-
-
-/* ============================================
-   components/plan-approval.css
-   ============================================ */
-/**
- * PlanApproval panel styles.
- * Panel shows approval options (plan content is displayed in chat).
- */
-
-/* ============================================
- * Plan Approval Panel (replaces input area)
- * ============================================ */
-
-.claudian-plan-approval-panel {
-  /* Match input wrapper padding structure */
-  padding: 10px;  /* Same as .claudian-input */
-  min-height: 60px;  /* Same as .claudian-input min-height */
-  outline: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.claudian-plan-approval-panel:focus {
-  outline: none;
-}
-
-/* Header: "Would you like to proceed?" */
-.claudian-plan-approval-header {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-bottom: 6px;
-}
-
-/* Options list - tighter spacing */
-.claudian-plan-approval-options {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  font-family: var(--font-monospace);
-  font-size: 13px;
-}
-
-.claudian-plan-approval-option {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 2px 0;
-  cursor: pointer;
-  color: var(--text-normal);
-  line-height: 1.4;
-}
-
-.claudian-plan-approval-option:hover {
-  color: var(--interactive-accent);
-}
-
-.claudian-plan-approval-option.focused {
-  color: var(--interactive-accent);
-}
-
-/* Caret - narrower */
-.claudian-plan-approval-caret {
-  width: 10px;
-  flex-shrink: 0;
-  color: var(--interactive-accent);
-  font-weight: bold;
-}
-
-.claudian-plan-approval-number {
-  flex-shrink: 0;
-  color: var(--text-muted);
-  white-space: nowrap;
-}
-
-.claudian-plan-approval-option.focused .claudian-plan-approval-caret,
-.claudian-plan-approval-option.focused .claudian-plan-approval-number {
-  color: var(--interactive-accent);
-}
-
-.claudian-plan-approval-option-label {
-  font-weight: 500;
-}
-
-/* Placeholder text for revise option (muted) */
-.claudian-plan-approval-placeholder {
-  color: var(--text-muted);
-  font-style: italic;
-}
-
-/* Inline revise input - must blend perfectly with option text */
-.claudian-plan-approval-revise-inline {
-  flex: 1;
-  border: none !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  color: var(--text-normal);
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: 500;
-  outline: none;
-  padding: 0 !important;
-  margin: 0 !important;
-  line-height: inherit;
-  letter-spacing: inherit;
-  text-indent: 0;
-  min-width: 0;
-  height: auto;
-}
-
-.claudian-plan-approval-revise-inline::placeholder {
-  color: var(--text-muted);
-  font-style: italic;
-  font-weight: 400;
-}
-
-/* ============================================
- * Plan Message (distinct styling in chat)
- * ============================================ */
-
-.claudian-message-plan {
-  background: rgba(0, 0, 0, 0.15);
-  border-radius: 6px;
-  /* Match plan banner horizontal margin (0 12px 8px 12px) */
-  margin: 8px 12px;
-  padding: 10px 16px;
-  /* Override assistant message width/max-width to respect margins */
-  width: auto;
-  max-width: none;
-  /* Match plan banner font styling */
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-/* ============================================
- * Approval Indicator (user's choice display)
- * ============================================ */
-
-.claudian-approval-indicator {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin: 8px 12px;
-  font-size: 13px;
-}
-
-.claudian-approval-indicator-icon {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-}
-
-.claudian-approval-indicator-icon svg {
-  width: 14px;
-  height: 14px;
-}
-
-/* Text always muted */
-.claudian-approval-indicator-text {
-  color: var(--text-muted);
-  margin-left: 2px;
-}
-
-/* Green check for approve (icon only) */
-.claudian-approval-indicator-approve .claudian-approval-indicator-icon {
-  color: var(--color-green);
-}
-
-/* Red x for revise (icon only) */
-.claudian-approval-indicator-revise .claudian-approval-indicator-icon {
-  color: var(--color-red);
-}
-
-
-/* ============================================
-   components/plan-banner.css
-   ============================================ */
-/**
- * PlanBanner styles.
- * Collapsible banner below header showing approved plan.
- */
-
-.claudian-plan-banner {
-  margin: 0 12px 8px 12px;
-  border-radius: 6px;
-  background: rgba(0, 168, 157, 0.08);
-  border: 1px solid rgba(0, 168, 157, 0.2);
-  overflow: hidden;
-}
-
-.claudian-plan-banner.expanded {
-  background: rgba(0, 168, 157, 0.05);
-}
-
-/* Header - clickable disclosure */
-.claudian-plan-banner-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  cursor: pointer;
-  user-select: none;
-  transition: background 0.15s ease;
-}
-
-.claudian-plan-banner-header:hover {
-  background: rgba(0, 168, 157, 0.1);
-}
-
-.claudian-plan-banner-chevron {
-  font-size: 10px;
-  color: #00A89D;
-  transition: transform 0.15s ease;
-}
-
-.claudian-plan-banner.expanded .claudian-plan-banner-chevron {
-  transform: rotate(0deg);
-}
-
-.claudian-plan-banner-title {
-  font-size: 12px;
-  font-weight: 500;
-  color: #00A89D;
-}
-
-/* Content area */
-.claudian-plan-banner-content {
-  padding: 0 12px 12px 12px;
-  max-height: 250px;
-  overflow-y: auto;
-  font-size: 13px;
-  line-height: 1.5;
-  border-top: 1px solid rgba(0, 168, 157, 0.15);
-}
-
-.claudian-plan-banner-content h1,
-.claudian-plan-banner-content h2,
-.claudian-plan-banner-content h3 {
-  margin-top: 0.8em;
-  margin-bottom: 0.4em;
-  font-size: 14px;
-}
-
-.claudian-plan-banner-content h1:first-child,
-.claudian-plan-banner-content h2:first-child,
-.claudian-plan-banner-content h3:first-child {
-  margin-top: 0.5em;
-}
-
-.claudian-plan-banner-content p {
-  margin: 0.5em 0;
-}
-
-.claudian-plan-banner-content ul,
-.claudian-plan-banner-content ol {
-  margin: 0.5em 0;
-  padding-left: 1.5em;
-}
-
-.claudian-plan-banner-content code {
-  font-size: 12px;
-  padding: 2px 4px;
-  background: var(--background-primary);
-  border-radius: 3px;
-}
-
-.claudian-plan-banner-content pre {
-  padding: 8px;
-  background: var(--background-primary);
-  border-radius: 4px;
-  overflow-x: auto;
-  font-size: 12px;
-}
-
-
-/* ============================================
    components/input.css
    ============================================ */
 /* Input area */
@@ -1806,36 +1267,67 @@
   padding: 12px 0 0 0;
 }
 
-/* Input wrapper (border container) */
+/* Input wrapper (border container) - flex column so textarea expands when no chips */
+/* Height calculation: context row (36px) + textarea min (60px) + toolbar (38px) + border (2px) = 136px */
 .claudian-input-wrapper {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 140px;
   border: 1px solid var(--background-modifier-border);
   border-radius: 6px;
   background: var(--background-primary);
 }
 
+/* Context row (file chip left, selection indicator right) - inside input wrapper at top */
+/* Collapsed by default; expanded via .has-content class; textarea fills remaining space */
+.claudian-context-row {
+  display: none;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-shrink: 0;
+  padding: 6px 10px 0 10px;
+  gap: 8px;
+}
+
+/* Show context row when it has visible content */
+.claudian-context-row.has-content {
+  display: flex;
+}
+
+/* Nav row (tab badges left, header icons right) - above input wrapper */
+.claudian-input-nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0 8px 0;
+  min-height: 0;
+}
+
 /* Selection indicator (shown when text is selected in editor) */
+/* Match file chip height (24px): chip has 16px remove button + 6px padding + 2px border */
+/* Indicator: 12px text + 10px padding (5+5) + 2px border = 24px */
 .claudian-selection-indicator {
-  position: absolute;
-  top: 4px;
-  right: 8px;
   color: #7abaff;
-  font-size: 11px;
+  font-size: 12px;
+  line-height: 1;
   opacity: 0.9;
   pointer-events: none;
   white-space: nowrap;
-  z-index: 1;
-  background: var(--background-primary);
-  padding: 2px 6px;
+  padding: 5px 6px;
+  border: 1px solid transparent;
   border-radius: 4px;
+  margin-left: auto;
+  flex-shrink: 0;
 }
 
 .claudian-input {
   width: 100%;
+  flex: 1 1 0;
   min-height: 60px;
-  max-height: 200px;
+  /* max-height dynamically set by JS: max(150px, 55% of view height) */
   resize: none;
-  padding: 10px;
+  padding: 8px 10px 10px 10px;
   border: none !important;
   border-radius: 6px;
   background: transparent !important;
@@ -1844,6 +1336,7 @@
   font-size: 14px;
   line-height: 1.4;
   box-shadow: none !important;
+  overflow-y: auto;
 }
 
 .claudian-input:hover,
@@ -1863,6 +1356,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  flex-shrink: 0;
   padding: 4px 6px 6px 6px;
 }
 
@@ -1871,8 +1365,6 @@
   display: none;
   flex-wrap: wrap;
   gap: 6px;
-  padding: 4px 0;
-  margin-bottom: 8px;
 }
 
 .claudian-file-chip {
@@ -1884,6 +1376,7 @@
   border: 1px solid var(--background-modifier-border);
   border-radius: 12px;
   font-size: 12px;
+  line-height: 1;
   max-width: 200px;
   cursor: pointer;
 }
@@ -1928,27 +1421,6 @@
 
 .claudian-file-chip:hover {
   background: var(--background-modifier-hover);
-}
-
-/* Edited file indicator - border highlight */
-.claudian-file-chip.claudian-file-chip-edited {
-  border: 1.5px solid var(--interactive-accent);
-}
-
-/* Edited files indicator section (non-attached edited files) */
-.claudian-edited-files-indicator {
-  display: none;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 0;
-  margin-bottom: 4px;
-}
-
-.claudian-edited-label {
-  font-size: 11px;
-  color: var(--text-muted);
-  margin-right: 2px;
 }
 
 /* Message Queue Indicator (shown below flavor text in thinking indicator) */
@@ -2267,50 +1739,19 @@
   background: #D97757;
 }
 
-/* Plan mode state */
-.claudian-permission-toggle.plan-mode {
-  cursor: pointer;
-}
-
-.claudian-permission-toggle.plan-mode .claudian-permission-label {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  color: #00A89D;
-  font-weight: 500;
-  min-width: auto;
-}
-
-.claudian-permission-toggle.plan-mode .claudian-toggle-switch {
-  display: none;
-}
-
-.claudian-plan-mode-icon {
-  display: flex;
-  align-items: center;
-  font-size: 10px;
-  letter-spacing: 2px;
-  transform: scaleX(1.3);
-  margin-right: 2px;
-}
-
-.claudian-permission-toggle.plan-mode:hover .claudian-permission-label {
-  opacity: 0.8;
-}
-
 
 /* ============================================
-   toolbar/context-path.css
+   toolbar/external-context.css
    ============================================ */
-/* Context Path Selector */
-.claudian-context-path-selector {
+/* External Context Selector */
+.claudian-external-context-selector {
   position: relative;
   display: flex;
   align-items: center;
   margin-left: 8px;
 }
 
-.claudian-context-path-icon-wrapper {
+.claudian-external-context-icon-wrapper {
   position: relative;
   display: flex;
   align-items: center;
@@ -2318,7 +1759,7 @@
   cursor: pointer;
 }
 
-.claudian-context-path-icon {
+.claudian-external-context-icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2330,23 +1771,23 @@
   transition: all 0.2s ease;
 }
 
-.claudian-context-path-icon-wrapper:hover .claudian-context-path-icon {
+.claudian-external-context-icon-wrapper:hover .claudian-external-context-icon {
   background: var(--background-modifier-hover);
   opacity: 0.8;
 }
 
-.claudian-context-path-icon.active {
+.claudian-external-context-icon.active {
   color: #D97757;
   opacity: 1;
-  animation: context-path-glow 2s ease-in-out infinite;
+  animation: external-context-glow 2s ease-in-out infinite;
 }
 
-.claudian-context-path-icon svg {
+.claudian-external-context-icon svg {
   width: 16px;
   height: 16px;
 }
 
-.claudian-context-path-badge {
+.claudian-external-context-badge {
   position: absolute;
   top: 0;
   right: 0;
@@ -2358,11 +1799,11 @@
   pointer-events: none;
 }
 
-.claudian-context-path-badge.visible {
+.claudian-external-context-badge.visible {
   opacity: 1;
 }
 
-.claudian-context-path-dropdown {
+.claudian-external-context-dropdown {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -2380,12 +1821,12 @@
   z-index: 100;
 }
 
-.claudian-context-path-selector:hover .claudian-context-path-dropdown {
+.claudian-external-context-selector:hover .claudian-external-context-dropdown {
   opacity: 1;
   visibility: visible;
 }
 
-.claudian-context-path-header {
+.claudian-external-context-header {
   padding: 10px 12px;
   font-size: 12px;
   font-weight: 600;
@@ -2393,12 +1834,12 @@
   border-bottom: 1px solid var(--background-modifier-border);
 }
 
-.claudian-context-path-list {
+.claudian-external-context-list {
   max-height: 200px;
   overflow-y: auto;
 }
 
-.claudian-context-path-empty {
+.claudian-external-context-empty {
   padding: 16px 12px;
   text-align: center;
   color: var(--text-muted);
@@ -2406,7 +1847,7 @@
   font-style: italic;
 }
 
-.claudian-context-path-item {
+.claudian-external-context-item {
   display: flex;
   align-items: center;
   padding: 8px 12px;
@@ -2414,11 +1855,11 @@
   border-bottom: 1px solid var(--background-modifier-border-focus);
 }
 
-.claudian-context-path-item:last-child {
+.claudian-external-context-item:last-child {
   border-bottom: none;
 }
 
-.claudian-context-path-text {
+.claudian-external-context-text {
   flex: 1;
   font-size: 12px;
   font-family: var(--font-monospace);
@@ -2428,7 +1869,39 @@
   white-space: nowrap;
 }
 
-.claudian-context-path-remove {
+.claudian-external-context-lock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--text-muted);
+  opacity: 0.4;
+  transition: all 0.15s ease;
+}
+
+.claudian-external-context-lock:hover {
+  background: var(--background-modifier-hover);
+  opacity: 0.8;
+}
+
+.claudian-external-context-lock.locked {
+  color: #D97757;
+  opacity: 0.9;
+}
+
+.claudian-external-context-lock.locked:hover {
+  opacity: 1;
+}
+
+.claudian-external-context-lock svg {
+  width: 12px;
+  height: 12px;
+}
+
+.claudian-external-context-remove {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2441,13 +1914,13 @@
   transition: all 0.15s ease;
 }
 
-.claudian-context-path-remove:hover {
+.claudian-external-context-remove:hover {
   background: rgba(220, 53, 69, 0.15);
   color: #dc3545;
   opacity: 1;
 }
 
-.claudian-context-path-remove svg {
+.claudian-external-context-remove svg {
   width: 14px;
   height: 14px;
 }
@@ -2771,13 +2244,32 @@
   color: var(--text-normal);
 }
 
-/* Context file chips */
-.claudian-file-chip-context {
-  border-color: rgba(217, 119, 87, 0.3);
+
+
+/* ============================================
+   features/file-link.css
+   ============================================ */
+/* Clickable file links that open files in Obsidian */
+.claudian-file-link {
+  color: var(--text-accent);
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: color 0.15s ease;
 }
 
-.claudian-file-chip-context .claudian-file-chip-icon {
-  color: #D97757;
+.claudian-file-link:hover {
+  color: var(--text-accent-hover);
+  text-decoration: underline;
+}
+
+/* File link inside inline code */
+code .claudian-file-link {
+  color: var(--text-accent);
+}
+
+code .claudian-file-link:hover {
+  color: var(--text-accent-hover);
 }
 
 
@@ -2850,23 +2342,44 @@
 
 /* Remove button */
 .claudian-image-remove {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 18px;
-  height: 18px;
+  position: relative;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   cursor: pointer;
-  color: var(--text-muted);
-  font-size: 16px;
-  line-height: 1;
-  transition: background 0.15s ease, color 0.15s ease;
+  transition: background 0.15s ease;
   flex-shrink: 0;
+  font-size: 0; /* Hide text character */
+}
+
+.claudian-image-remove::before,
+.claudian-image-remove::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 2px;
+  background: var(--text-muted);
+  border-radius: 1px;
+  transition: background 0.15s ease;
+}
+
+.claudian-image-remove::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.claudian-image-remove::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
 }
 
 .claudian-image-remove:hover {
   background: var(--background-modifier-error);
-  color: var(--text-on-accent);
+}
+
+.claudian-image-remove:hover::before,
+.claudian-image-remove:hover::after {
+  background: var(--text-on-accent);
 }
 
 /* Drop overlay - inside input wrapper */
@@ -2941,6 +2454,51 @@
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+
+/* ============================================
+   features/image-embed.css
+   ============================================ */
+/* Image embed styles - displays ![[image.png]] wikilinks as actual images */
+
+.claudian-embedded-image {
+  display: inline-block;
+  max-width: 100%;
+  margin: 0.5em 0;
+  vertical-align: middle;
+}
+
+.claudian-embedded-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-s);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.claudian-embedded-image img:hover {
+  opacity: 0.9;
+}
+
+/* When image is inline with text */
+.claudian-text-block p .claudian-embedded-image {
+  margin: 0.25em 0;
+}
+
+/* Block-level image (standalone on its own line) */
+.claudian-text-block p > .claudian-embedded-image:only-child {
+  display: block;
+  margin: 0.75em 0;
+}
+
+/* Fallback when image file not found */
+.claudian-embedded-image-fallback {
+  color: var(--text-muted);
+  font-style: italic;
+  background: var(--background-modifier-hover);
+  padding: 0.1em 0.4em;
+  border-radius: var(--radius-s);
 }
 
 
@@ -3178,6 +2736,7 @@
   cursor: pointer;
   user-select: none;
   background: transparent;
+  overflow: hidden;
 }
 
 .claudian-write-edit-icon {
@@ -3194,6 +2753,7 @@
 
 .claudian-write-edit-label {
   flex: 1;
+  min-width: 0;
   font-size: 13px;
   font-weight: 500;
   color: var(--text-normal);
@@ -3409,8 +2969,8 @@
 }
 
 .claudian-slash-name {
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 500;
   color: var(--text-normal);
   font-family: var(--font-monospace);
 }
@@ -3419,13 +2979,15 @@
   font-size: 12px;
   color: var(--text-muted);
   margin-left: 8px;
-  font-style: italic;
 }
 
 .claudian-slash-desc {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-muted);
   margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .claudian-slash-empty {
@@ -3515,6 +3077,18 @@
 
 .claudian-deny-btn:hover {
   opacity: 0.9;
+}
+
+.claudian-always-deny-btn {
+  background: var(--background-modifier-error);
+  color: var(--text-on-accent);
+  /* Use error-hover if available, fallback to slightly darker error color */
+  border: 1px solid var(--background-modifier-error-hover, var(--background-modifier-error));
+}
+
+.claudian-always-deny-btn:hover {
+  background: var(--background-modifier-error-hover, var(--background-modifier-error));
+  filter: brightness(0.9);
 }
 
 .claudian-allow-btn {
@@ -3891,10 +3465,46 @@
   font-size: 13px;
 }
 
+.claudian-mcp-test-tool-toggle {
+  margin-left: auto;
+}
+
+.claudian-mcp-test-tool-toggle .checkbox-container {
+  display: flex;
+  align-items: center;
+}
+
+.claudian-mcp-test-tool-disabled {
+  opacity: 0.75;
+}
+
+.claudian-mcp-test-tool-disabled .claudian-mcp-test-tool-name {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.claudian-mcp-toggle-all-btn {
+  margin-right: 8px;
+}
+
+.claudian-mcp-toggle-all-btn.is-destructive {
+  background: rgba(var(--color-red-rgb), 0.1);
+  border-color: rgba(var(--color-red-rgb), 0.3);
+  color: var(--text-error);
+}
+
+.claudian-mcp-toggle-all-btn.is-destructive:hover {
+  background: rgba(var(--color-red-rgb), 0.2);
+}
+
 .claudian-mcp-test-tool-desc {
   font-size: 12px;
   color: var(--text-muted);
   margin-top: 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .claudian-mcp-test-no-tools {
@@ -3944,6 +3554,7 @@
 /* Custom section descriptions - align with items */
 .claudian-slash-settings-desc,
 .claudian-mcp-settings-desc,
+.claudian-plugin-settings-desc,
 .claudian-approved-desc {
   padding: 0 12px;
 }
@@ -3981,87 +3592,6 @@
 /* Media folder input width */
 .claudian-settings-media-input {
   width: 200px;
-}
-
-
-/* ============================================
-   settings/approved-actions.css
-   ============================================ */
-/* Settings - Approved Actions List */
-.claudian-approved-desc {
-  margin-bottom: 12px;
-}
-
-.claudian-approved-empty {
-  padding: 16px;
-  text-align: center;
-  color: var(--text-muted);
-  background: var(--background-secondary);
-  border-radius: 6px;
-  font-size: 13px;
-  margin-bottom: 16px;
-}
-
-.claudian-approved-list {
-  margin-bottom: 16px;
-}
-
-.claudian-approved-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px;
-  background: var(--background-secondary);
-  border-radius: 6px;
-  margin-bottom: 8px;
-}
-
-.claudian-approved-item-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.claudian-approved-item-tool {
-  display: inline-block;
-  padding: 2px 8px;
-  background: rgba(217, 119, 87, 0.15);
-  color: #D97757;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 500;
-  margin-right: 8px;
-}
-
-.claudian-approved-item-pattern {
-  font-family: var(--font-monospace);
-  font-size: 12px;
-  color: var(--text-normal);
-  margin-top: 4px;
-  word-break: break-all;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.claudian-approved-item-date {
-  font-size: 11px;
-  color: var(--text-muted);
-  margin-left: 8px;
-}
-
-.claudian-approved-remove-btn {
-  padding: 4px 12px;
-  font-size: 12px;
-  background: var(--background-modifier-error);
-  color: var(--text-on-accent);
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  flex-shrink: 0;
-  margin-left: 12px;
-}
-
-.claudian-approved-remove-btn:hover {
-  opacity: 0.9;
 }
 
 
@@ -4707,6 +4237,184 @@
 
 
 /* ============================================
+   settings/plugin-settings.css
+   ============================================ */
+/* Plugin Settings */
+.claudian-plugin-settings-desc {
+  margin-bottom: 12px;
+}
+
+.claudian-plugins-container {
+  margin-top: 8px;
+}
+
+.claudian-plugin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 0 12px;
+}
+
+.claudian-plugin-label {
+  font-size: var(--font-ui-small);
+  color: var(--text-muted);
+  font-weight: var(--font-medium);
+}
+
+.claudian-plugin-empty {
+  padding: 16px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 13px;
+  background: var(--background-secondary);
+  border-radius: 6px;
+}
+
+.claudian-plugin-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.claudian-plugin-section-header {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  padding: 8px 12px 4px;
+  font-weight: 600;
+}
+
+.claudian-plugin-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--background-secondary);
+  border-radius: 6px;
+  transition: background 0.15s ease;
+}
+
+.claudian-plugin-item:hover {
+  background: var(--background-modifier-hover);
+}
+
+.claudian-plugin-item-disabled {
+  opacity: 0.6;
+}
+
+.claudian-plugin-item-error {
+  opacity: 0.8;
+}
+
+.claudian-plugin-status {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+.claudian-plugin-status-enabled {
+  background: var(--color-green);
+}
+
+.claudian-plugin-status-disabled {
+  background: var(--text-muted);
+}
+
+.claudian-plugin-status-error {
+  background: var(--text-error);
+}
+
+.claudian-plugin-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.claudian-plugin-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.claudian-plugin-name {
+  font-weight: 600;
+}
+
+.claudian-plugin-version-badge {
+  font-size: 10px;
+  padding: 2px 6px;
+  background: var(--background-modifier-border);
+  border-radius: 4px;
+  color: var(--text-muted);
+}
+
+.claudian-plugin-scope-badge {
+  font-size: 10px;
+  padding: 2px 6px;
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.claudian-plugin-error-badge {
+  font-size: 10px;
+  padding: 2px 6px;
+  background: var(--text-error);
+  color: var(--text-on-accent);
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.claudian-plugin-preview {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.claudian-plugin-preview-error {
+  color: var(--text-error);
+}
+
+.claudian-plugin-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.claudian-plugin-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.claudian-plugin-action-btn:hover {
+  background: var(--background-modifier-hover);
+  color: var(--text-normal);
+}
+
+.claudian-plugin-action-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+
+/* ============================================
    accessibility.css
    ============================================ */
 /* Accessibility - Focus Visible Styles */
@@ -4714,7 +4422,6 @@
 /* Collapsible headers - keyboard focus indicators */
 .claudian-tool-header:focus-visible,
 .claudian-thinking-header:focus-visible,
-.claudian-todo-header:focus-visible,
 .claudian-subagent-header:focus-visible {
   outline: 2px solid var(--interactive-accent);
   outline-offset: 2px;
