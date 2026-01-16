@@ -1,0 +1,20 @@
+{
+  "id": "197e64d0-5b9f-4146-ba74-89a506ed4ece",
+  "title": "Start Obsidian vault assistance",
+  "titleGenerationStatus": "success",
+  "createdAt": 1768571524635,
+  "updatedAt": 1768571528387,
+  "lastResponseAt": 1768571524636,
+  "sessionId": "197e64d0-5b9f-4146-ba74-89a506ed4ece",
+  "sdkSessionId": "197e64d0-5b9f-4146-ba74-89a506ed4ece",
+  "currentNote": "未命名.base",
+  "usage": {
+    "model": "claude-sonnet-4-5-20250929",
+    "inputTokens": 10,
+    "cacheCreationInputTokens": 18104,
+    "cacheReadInputTokens": 0,
+    "contextWindow": 200000,
+    "contextTokens": 18114,
+    "percentage": 9
+  }
+}
