@@ -3,17 +3,87 @@
   "title": "Start Obsidian vault assistance",
   "titleGenerationStatus": "success",
   "createdAt": 1768571524635,
-  "updatedAt": 1768709349474,
-  "lastResponseAt": 1768709349474,
+  "updatedAt": 1768709640579,
+  "lastResponseAt": 1768709640579,
   "sessionId": "476949df-c543-4a13-bdf4-cd66d1f03b2d",
   "sdkSessionId": "476949df-c543-4a13-bdf4-cd66d1f03b2d",
   "usage": {
     "model": "claude-sonnet-4-5-20250929",
-    "inputTokens": 229,
-    "cacheCreationInputTokens": 74720,
-    "cacheReadInputTokens": 190681,
+    "inputTokens": 408,
+    "cacheCreationInputTokens": 128935,
+    "cacheReadInputTokens": 1525255,
     "contextWindow": 200000,
-    "contextTokens": 265630,
+    "contextTokens": 1654598,
     "percentage": 100
+  },
+  "toolDiffData": {
+    "toolu_01NBrpLVK32Ls3hzW8Xudxoa": {
+      "filePath": "未命名.md",
+      "skippedReason": "too_large"
+    },
+    "toolu_018VqCKRBwA9q4QqRHKLdqBk": {
+      "filePath": "未命名.md",
+      "skippedReason": "too_large"
+    },
+    "toolu_01FurhgVM1SohB6RHJUwEGws": {
+      "filePath": "未命名.md",
+      "skippedReason": "too_large"
+    },
+    "toolu_01TQi2SJyM4qH8Qv1t6noJL9": {
+      "filePath": "未命名.md",
+      "skippedReason": "too_large"
+    },
+    "toolu_01MJfya5RPqXVT7fLgyy6t6m": {
+      "filePath": "未命名.md",
+      "skippedReason": "too_large"
+    },
+    "toolu_01UWVNnr3M7mbff5w2yjPATD": {
+      "filePath": "未命名.md",
+      "skippedReason": "too_large"
+    },
+    "toolu_01AbbQRB9EPWHJtrn1Tw2axM": {
+      "filePath": "未命名.md",
+      "skippedReason": "too_large"
+    },
+    "toolu_015sFFUaiFXVtEa1cjEiaeB2": {
+      "filePath": "未命名.md",
+      "skippedReason": "too_large"
+    },
+    "toolu_01XUr2ZCQnDZsmhDV4AchMfe": {
+      "filePath": "未命名.md",
+      "skippedReason": "too_large"
+    },
+    "toolu_014AA8cfFU7dfEvV9FxZf1PR": {
+      "filePath": "未命名.md",
+      "skippedReason": "too_large"
+    },
+    "toolu_01WiSaAxxqvhGuiL6HHUw3Ba": {
+      "filePath": "未命名.md",
+      "skippedReason": "too_large"
+    },
+    "toolu_01P48mgoFc4odESuJbCzbQot": {
+      "filePath": "未命名.md",
+      "skippedReason": "too_large"
+    },
+    "toolu_01YJgHniZ9CQvJ35fHJCtEfx": {
+      "filePath": "未命名.md",
+      "skippedReason": "too_large"
+    },
+    "toolu_01EyaB2WLzaHoPJntcHYJvbF": {
+      "filePath": "未命名.md",
+      "skippedReason": "too_large"
+    },
+    "toolu_01N5aEqDSzttReB8thc4n2mu": {
+      "filePath": "未命名.md",
+      "skippedReason": "too_large"
+    },
+    "toolu_01NZg5FVBtct71kLMShJDV5N": {
+      "filePath": "未命名.md",
+      "skippedReason": "too_large"
+    },
+    "toolu_01DS5hBDnoKeCDq49mcP3SGq": {
+      "filePath": "未命名.md",
+      "skippedReason": "too_large"
+    }
   }
 }
