@@ -20,8 +20,26 @@
               "icon": "lucide-file",
               "title": "未命名"
             }
+          },
+          {
+            "id": "348c85b788ef5a1e",
+            "type": "leaf",
+            "state": {
+              "type": "canvas",
+              "state": {
+                "file": "展形ERP财务结算方案-架构图.canvas",
+                "viewState": {
+                  "x": -393.4069939233517,
+                  "y": -32.76115544363449,
+                  "zoom": 0.12148837674627
+                }
+              },
+              "icon": "lucide-layout-dashboard",
+              "title": "展形ERP财务结算方案-架构图"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -193,11 +211,12 @@
       "bases:新建数据库": false
     }
   },
-  "active": "ba1eb24384487978",
+  "active": "348c85b788ef5a1e",
   "lastOpenFiles": [
+    "未命名.md",
+    "展形ERP财务结算方案-架构图.canvas",
     "README.md",
     "未命名 1.md",
-    "未命名.md",
     "未命名.base"
   ]
 }
