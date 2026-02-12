@@ -81,12 +81,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "mes规划.md",
+                "file": "leanleap-article.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "mes规划"
+              "title": "leanleap-article"
             }
           }
         ],
@@ -147,7 +147,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 254.5
   },
   "right": {
     "id": "48013b30c04c1a65",
@@ -247,7 +247,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 576.5
+    "width": 546.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -264,17 +264,26 @@
   },
   "active": "a6a9c1f2cfabfe1c",
   "lastOpenFiles": [
-    "展形ERP财务结算方案-架构图.canvas",
-    "未命名 3.md",
-    "Pasted image 20260210234309.png",
-    "Pasted image 20260210234012.png",
-    "Pasted image 20260210232648.png",
-    "未命名 2.md",
     "未命名 1.pdf",
+    "article-screenshots/10-workflow-definition.png",
+    "article-screenshots/08-production-gantt.png",
+    "article-screenshots/07-inventory-stats.png",
+    "article-screenshots/09-financial-receivable.png",
+    "article-screenshots/11-workflow-designer.png",
+    "article-screenshots/06-sales-contract-list.png",
+    "article-screenshots/05-purchase-arrival-edit.png",
+    "article-screenshots/08-production-work-order.png",
+    "article-screenshots/01-login.png",
+    "article-screenshots/09-financial-settlement.png",
+    "article-screenshots",
+    "leanleap-article.md",
     "未命名 1.md",
     "未命名.md",
-    "README.md",
     "mes规划.md",
+    "展形ERP财务结算方案-架构图.canvas",
+    "未命名 3.md",
+    "未命名 2.md",
+    "README.md",
     "2024年显示产业主要统计_Vol2_中文翻译.pdf",
     "2024年显示产业主要统计_Vol2_中文翻译.md",
     "未命名 1_副本.pdf",
