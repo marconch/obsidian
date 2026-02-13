@@ -276,7 +276,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 546.5
+    "width": 609.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -293,6 +293,7 @@
   },
   "active": "550c8a19af948cd8",
   "lastOpenFiles": [
+    "gongzhonghao/leanleap-wechat-export.html",
     "gongzhonghao/leanleap-article-wechat-公众号版.md",
     "gongzhonghao/article-screenshots/01-login.png",
     "gongzhonghao/leanleap-article-wechat.md",
