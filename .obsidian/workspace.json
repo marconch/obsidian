@@ -81,12 +81,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "leanleap-article.md",
+                "file": "gongzhonghao/leanleap-article-wechat.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "leanleap-article"
+              "title": "leanleap-article-wechat"
             }
           }
         ],
@@ -264,19 +264,27 @@
   },
   "active": "a6a9c1f2cfabfe1c",
   "lastOpenFiles": [
-    "未命名 1.pdf",
-    "article-screenshots/10-workflow-definition.png",
-    "article-screenshots/08-production-gantt.png",
-    "article-screenshots/07-inventory-stats.png",
-    "article-screenshots/09-financial-receivable.png",
-    "article-screenshots/11-workflow-designer.png",
-    "article-screenshots/06-sales-contract-list.png",
-    "article-screenshots/05-purchase-arrival-edit.png",
-    "article-screenshots/08-production-work-order.png",
-    "article-screenshots/01-login.png",
-    "article-screenshots/09-financial-settlement.png",
-    "article-screenshots",
+    "gongzhonghao/leanleap-article.md",
     "leanleap-article.md",
+    "gongzhonghao/article-screenshots/backup/11-workflow-designer.png",
+    "gongzhonghao/article-screenshots/backup/10-workflow.png",
+    "gongzhonghao/article-screenshots/backup/09-financial-receivable.png",
+    "gongzhonghao/article-screenshots/backup/09-financial-settlement.png",
+    "gongzhonghao/article-screenshots/backup/08-production-work-order.png",
+    "gongzhonghao/article-screenshots/backup/10-workflow-definition.png",
+    "gongzhonghao/article-screenshots/backup/08-production-gantt.png",
+    "gongzhonghao/article-screenshots/backup/08-production-factory.png",
+    "gongzhonghao/article-screenshots/backup/07-inventory-stats.png",
+    "gongzhonghao/article-screenshots/backup/06-sales-contract-list.png",
+    "gongzhonghao/article-screenshots/backup",
+    "gongzhonghao/leanleap-article-wechat.md",
+    "gongzhonghao/blur_sensitive.py",
+    "gongzhonghao/article-screenshots-blurred",
+    "gongzhonghao/article-screenshots",
+    "gongzhonghao",
+    "gongzhonghao-lite.zip",
+    "未命名 1.pdf",
+    "article-screenshots",
     "未命名 1.md",
     "未命名.md",
     "mes规划.md",
@@ -286,7 +294,6 @@
     "README.md",
     "2024年显示产业主要统计_Vol2_中文翻译.pdf",
     "2024年显示产业主要统计_Vol2_中文翻译.md",
-    "未命名 1_副本.pdf",
-    "未命名.base"
+    "未命名 1_副本.pdf"
   ]
 }
