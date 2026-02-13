@@ -31,12 +31,10 @@
 
 **登录页** —— 多租户、多语言，过年期间海外客户发消息也不怕
 
-![登录页面](article-screenshots/01-login.png)
-
+![[gongzhonghao/article-screenshots/01-login.png]]
 **工作台** —— 一进来就知道今天该干啥，不用再翻群消息找待办
 
-![首页工作台](article-screenshots/02-homepage.png)
-
+![[gongzhonghao/article-screenshots/02-homepage-full.png]]
 技术选型嘛，说人话就是——**快、稳、不过时**：
 
 ✅ **多租户** —— 集团下面几个公司？各管各的，数据不串门
@@ -57,15 +55,15 @@
 
 **合同列表**：谁家供的、什么价、到了没有、付了没有——一表打尽
 
-![采购合同](article-screenshots/03-purchase-contract-list.png)
+![[gongzhonghao/article-screenshots/03-purchase-contract-list.png]]
 
-**杀手锏：双方磅单核对** 🔥
+**杀手锏：双方订单核对** 🔥
 
 搞大宗原材料的老板都懂——我方过磅800吨，对方说795吨，那5吨到底算谁的？
 
 系统同时记录双方数据，差异自动标红。**谁也别想糊弄谁。**
 
-![入库单编辑](article-screenshots/05-purchase-arrival-edit.png)
+![[gongzhonghao/article-screenshots/05-purchase-arrival-edit.png]]
 
 ---
 
@@ -78,8 +76,8 @@
 ```
 销售合同 → 销售订单 → 销售出库 → 销售发票 → 客户结算
 ```
+![[gongzhonghao/article-screenshots/06-sales-contract-list.png]]
 
-![销售合同](article-screenshots/06-sales-contract-list.png)
 
 出库自动扣库存、扣批次——**别再出现"系统里有货，仓库说没了"的年度名场面。**
 
@@ -92,8 +90,8 @@
 说个真事：某厂年前盘库，账上钢材1200吨，实际一数——1150吨。50吨去哪了？**没人说得清。**
 
 这就是没系统的代价。过完年，老板看了报表，**血压直接上来了。**
+![[gongzhonghao/article-screenshots/07-inventory-stats.png]]
 
-![库存统计](article-screenshots/07-inventory-stats.png)
 
 领跃仓储帮你治这个"老毛病"：
 

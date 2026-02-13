@@ -107,12 +107,14 @@
             "id": "3e18b3c93ebe68b2",
             "type": "leaf",
             "state": {
-              "type": "release-notes",
+              "type": "markdown",
               "state": {
-                "currentVersion": "1.11.7"
+                "file": "gongzhonghao/leanleap-article-wechat.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-book-up",
-              "title": "版本说明 1.11.7"
+              "icon": "lucide-file",
+              "title": "leanleap-article-wechat"
             }
           }
         ],
@@ -289,7 +291,7 @@
       "bases:新建数据库": false
     }
   },
-  "active": "3e18b3c93ebe68b2",
+  "active": "53decc7fd174cb07",
   "lastOpenFiles": [
     "gongzhonghao/article-screenshots/01-login.png",
     "gongzhonghao/leanleap-article-wechat.md",
