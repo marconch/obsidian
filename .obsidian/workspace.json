@@ -88,9 +88,23 @@
               "icon": "lucide-file",
               "title": "leanleap-article-wechat"
             }
+          },
+          {
+            "id": "80852280fe31f0ff",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "gongzhonghao/leanleap-article-wechat.md",
+                "mode": "preview",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "leanleap-article-wechat"
+            }
           }
         ],
-        "currentTab": 5
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -262,8 +276,9 @@
       "bases:新建数据库": false
     }
   },
-  "active": "a6a9c1f2cfabfe1c",
+  "active": "80852280fe31f0ff",
   "lastOpenFiles": [
+    "gongzhonghao/article-screenshots/01-login.png.sb-eb013f6e-FQBYKU",
     "gongzhonghao/leanleap-article.md",
     "leanleap-article.md",
     "gongzhonghao/article-screenshots/backup/11-workflow-designer.png",
